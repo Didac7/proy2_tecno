@@ -126,7 +126,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import { router } from '@inertiajs/vue3';
+import { router, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import axios from 'axios';
 
@@ -136,6 +136,8 @@ const props = defineProps({
   pagoExistente: Object,
   opcionesCuotas: Array,
 });
+
+const page = usePage();
 
 const form = reactive({
   id_paquete: props.paquete.id_paquete,
@@ -173,7 +175,7 @@ const crearPago = async () => {
   error.value = null;
 
   try {
-    router.post('/pagos', form, {
+    router.post(`${page.props.appUrl}/pagos`, form, {
       onSuccess: () => {
         pagoCreado.value = true;
         if (form.tipo_pago === 'CREDITO' && form.metodo_cobro === 'QR') {
@@ -202,7 +204,7 @@ const generarQR = async () => {
   error.value = null;
 
   try {
-    const response = await axios.post(`/api/pagos/${props.paquete.id_paquete}/generar-qr`);
+    const response = await axios.post(`${page.props.appUrl}/api/pagos/${props.paquete.id_paquete}/generar-qr`);
     
     if (response.data.success) {
       qrData.value = response.data.qr;

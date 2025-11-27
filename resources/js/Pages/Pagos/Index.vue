@@ -119,7 +119,7 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import { Link, router } from '@inertiajs/vue3';
+import { Link, router, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -128,12 +128,14 @@ const props = defineProps({
   filters: Object,
 });
 
+const page = usePage();
+
 const search = ref(props.filters.search || '');
 const estadoFilter = ref(props.filters.estado || '');
 const clienteFilter = ref(props.filters.cliente || '');
 
 const applyFilters = () => {
-  router.get('/pagos', { 
+  router.get(`${page.props.appUrl}/pagos`, { 
     search: search.value,
     estado: estadoFilter.value,
     cliente: clienteFilter.value

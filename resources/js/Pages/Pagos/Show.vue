@@ -52,12 +52,14 @@
 </template>
 
 <script setup>
-import { Link, router } from '@inertiajs/vue3';
+import { Link, router, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
   pago: Object
 });
+
+const page = usePage();
 
 const formatDate = (date) => {
   if (!date) return '-';
@@ -72,7 +74,7 @@ const formatDate = (date) => {
 
 const confirmarPago = () => {
   if (confirm('¿Está seguro de confirmar este pago?')) {
-    router.post(`/pagos/${props.pago.id_pago}/registrar`);
+    router.post(`${page.props.appUrl}/pagos/${props.pago.id_pago}/registrar`);
   }
 };
 </script>

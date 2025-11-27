@@ -63,7 +63,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { router } from '@inertiajs/vue3';
+import { router, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import axios from 'axios';
 
@@ -73,6 +73,8 @@ const props = defineProps({
   cuotas: Array,
 });
 
+const page = usePage();
+
 const loading = ref(false);
 const qrData = ref(null);
 const cuotaSeleccionada = ref(null);
@@ -80,7 +82,7 @@ const cuotaSeleccionada = ref(null);
 const pagarCuota = async (idCuota) => {
   loading.value = true;
   try {
-    const response = await axios.post(`/api/cuotas/${idCuota}/pagar`);
+    const response = await axios.post(`${page.props.appUrl}/api/cuotas/${idCuota}/pagar`);
     if (response.data.success) {
       qrData.value = response.data.qr;
       cuotaSeleccionada.value = props.cuotas.find(c => c.id_cuota === idCuota);
@@ -97,7 +99,7 @@ const pagarCuotaEfectivo = async (idCuota) => {
   
   loading.value = true;
   try {
-    router.post(`/pagos/cuotas/${idCuota}/pagar-efectivo`, {}, {
+    router.post(`${page.props.appUrl}/pagos/cuotas/${idCuota}/pagar-efectivo`, {}, {
       onSuccess: () => {
         alert('Pago de cuota registrado correctamente');
         // Recargar la página para mostrar el estado actualizado
