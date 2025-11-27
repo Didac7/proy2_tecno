@@ -90,7 +90,7 @@
 </template>
 
 <script setup>
-import { useForm, Link } from '@inertiajs/vue3';
+import { useForm, Link, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -106,8 +106,10 @@ const form = useForm({
   telefono_destinatario: props.paquete.telefono_destinatario
 });
 
+const page = usePage();
+
 const submit = () => {
-  form.put(`/paquetes/${props.paquete.id_paquete}`);
+  form.put(`${page.props.appUrl}/paquetes/${props.paquete.id_paquete}`);
 };
 </script>
 

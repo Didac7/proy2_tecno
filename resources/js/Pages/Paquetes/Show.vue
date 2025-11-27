@@ -197,7 +197,7 @@
 </template>
 
 <script setup>
-import { Link, router } from '@inertiajs/vue3';
+import { Link, router, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -206,6 +206,7 @@ const props = defineProps({
 
 const canEdit = true;
 const canDeliver = true;
+const page = usePage();
 
 const getEstadoClass = (estado) => {
   const classes = {
@@ -238,7 +239,7 @@ const formatDateTime = (date) => {
 
 const marcarEntregado = () => {
   if (confirm('¿Está seguro de marcar este paquete como entregado?')) {
-    router.post(`/paquetes/${props.paquete.id_paquete}/entregar`);
+    router.post(`${page.props.appUrl}/paquetes/${props.paquete.id_paquete}/entregar`);
   }
 };
 </script>
