@@ -126,7 +126,7 @@
 </template>
 
 <script setup>
-import { useForm, Link } from '@inertiajs/vue3';
+import { useForm, Link, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -142,10 +142,13 @@ const form = useForm({
   tipo_vehiculo: '',
   id_chofer: '',
   gps_activo: true,
+  
 });
 
+const page = usePage();
+
 const submit = () => {
-  form.post('/vehiculos');
+  form.post(`${page.props.appUrl}/vehiculos`);
 };
 </script>
 

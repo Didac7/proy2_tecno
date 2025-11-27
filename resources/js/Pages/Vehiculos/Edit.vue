@@ -99,7 +99,7 @@
 </template>
 
 <script setup>
-import { useForm, Link } from '@inertiajs/vue3';
+import { useForm, Link, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -117,8 +117,10 @@ const form = useForm({
   id_chofer: props.vehiculo.id_chofer
 });
 
+const page = usePage();
+
 const submit = () => {
-  form.put(`/vehiculos/${props.vehiculo.id_vehiculo}`);
+  form.put(`${page.props.appUrl}/vehiculos/${props.vehiculo.id_vehiculo}`);
 };
 </script>
 

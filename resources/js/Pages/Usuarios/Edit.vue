@@ -132,7 +132,7 @@ const form = useForm({
 });
 
 const submit = () => {
-  form.put(`/usuarios/${props.usuario.id_usuario}`);
+  form.put(`${page.props.appUrl}/usuarios/${props.usuario.id_usuario}`);
 };
 </script>
 
