@@ -142,7 +142,7 @@
 </template>
 
 <script setup>
-import { useForm, Link } from '@inertiajs/vue3';
+import { useForm, Link, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const form = useForm({
@@ -157,8 +157,10 @@ const form = useForm({
   estado: 'ACTIVO',
 });
 
+const page = usePage();
+
 const submit = () => {
-  form.post('/usuarios');
+  form.post(`${page.props.appUrl}/usuarios`);
 };
 </script>
 
