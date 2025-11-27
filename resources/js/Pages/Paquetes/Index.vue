@@ -151,7 +151,7 @@ const searchForm = ref({
 
 
 const buscar = () => {
-  router.get('/paquetes', searchForm.value, {
+  router.get(`${page.props.appUrl}/paquetes`, searchForm.value, {
     preserveState: true,
   });
 };

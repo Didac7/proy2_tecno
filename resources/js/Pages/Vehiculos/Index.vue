@@ -100,7 +100,7 @@ const searchForm = ref({
 });
 
 const buscar = () => {
-  router.get('/vehiculos', searchForm.value, {
+  router.get(`${page.props.appUrl}/vehiculos`, searchForm.value, {
     preserveState: true,
   });
 };

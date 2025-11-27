@@ -94,7 +94,7 @@ const debounce = (fn, delay) => {
 };
 
 const handleSearch = debounce(() => {
-  router.get('/destinos', { 
+  router.get(`${page.props.appUrl}/destinos`, { 
     search: search.value 
   }, { 
     preserveState: true, 
