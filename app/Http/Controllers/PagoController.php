@@ -389,6 +389,74 @@ class PagoController extends Controller
     }
 
     /**
+     * Consultar estado de una cuota
+     */
+    public function consultarEstadoCuota($id_cuota)
+    {
+        try {
+            $cuota = \App\Models\Cuota::findOrFail($id_cuota);
+
+            if ($cuota->numero_transaccion) {
+                // Consultar en PagoFácil (usando el ID de transacción de PagoFácil si lo tuviéramos, 
+                // pero aquí guardamos el de la empresa en numero_transaccion? 
+                // Revisando generarQR, guardamos qrData['transactionId'] en numero_transaccion de la cuota.
+                // Espera, en generarQR de cuota:
+                // 'numero_transaccion' => $qrData['transactionId']
+                // Entonces sí es el ID de PagoFácil.
+                
+                $transactionData = $this->pagoFacilService->queryTransaction(
+                    $cuota->numero_transaccion
+                );
+
+                // Actualizar estado local
+                $estadoPago = $this->mapearEstadoPago($transactionData['paymentStatus']);
+                
+                if ($estadoPago === 'PAGADO' && $cuota->estado !== 'PAGADA') {
+                    DB::beginTransaction();
+                    
+                    $cuota->update([
+                        'estado' => 'PAGADA',
+                        'fecha_pago' => $transactionData['paymentDate'] ?? now(),
+                    ]);
+
+                    // Actualizar plan
+                    $plan = $cuota->planPago;
+                    $plan->increment('cuotas_pagadas');
+                    
+                    // Verificar si se completó el plan
+                    if ($plan->cuotas_pagadas >= $plan->numero_cuotas) {
+                        $pago = $plan->pago;
+                        $pago->update([
+                            'estado_pago' => 'PAGADO',
+                            'monto_pagado' => $pago->monto_total,
+                            'fecha_pago' => now(),
+                        ]);
+                    }
+                    
+                    DB::commit();
+                }
+
+                return response()->json([
+                    'success' => true,
+                    'cuota' => $cuota,
+                    'transaction_data' => $transactionData,
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'cuota' => $cuota,
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al consultar el estado de la cuota: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
      * Calcular monto del paquete
      */
     private function calcularMontoPaquete($paquete)

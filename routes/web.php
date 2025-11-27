@@ -75,6 +75,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('pagos.generar-qr');
     Route::get('api/pagos/{id_pago}/estado', [App\Http\Controllers\PagoController::class, 'consultarEstado'])
         ->name('pagos.consultar-estado');
+    Route::get('api/cuotas/{id_cuota}/estado', [App\Http\Controllers\PagoController::class, 'consultarEstadoCuota'])
+        ->name('cuotas.consultar-estado');
     
     // CU8 - Reportes
     Route::middleware(['role:SECRETARIA,PROPIETARIO'])->group(function () {

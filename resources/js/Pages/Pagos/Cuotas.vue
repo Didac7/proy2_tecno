@@ -62,7 +62,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onUnmounted } from 'vue';
 import { router, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import axios from 'axios';
@@ -78,6 +78,7 @@ const page = usePage();
 const loading = ref(false);
 const qrData = ref(null);
 const cuotaSeleccionada = ref(null);
+let pollingInterval = null;
 
 const pagarCuota = async (idCuota) => {
   loading.value = true;
@@ -86,12 +87,33 @@ const pagarCuota = async (idCuota) => {
     if (response.data.success) {
       qrData.value = response.data.qr;
       cuotaSeleccionada.value = props.cuotas.find(c => c.id_cuota === idCuota);
+      iniciarPolling(idCuota);
     }
   } catch (error) {
     alert('Error al generar QR');
   } finally {
     loading.value = false;
   }
+};
+
+const iniciarPolling = (idCuota) => {
+  if (pollingInterval) clearInterval(pollingInterval);
+  
+  pollingInterval = setInterval(async () => {
+    try {
+      const response = await axios.get(`${page.props.appUrl}/api/cuotas/${idCuota}/estado`);
+      if (response.data.success && response.data.cuota.estado === 'PAGADA') {
+        clearInterval(pollingInterval);
+        qrData.value = null;
+        cuotaSeleccionada.value = null;
+        // Recargar página para mostrar estado actualizado
+        router.reload({ only: ['cuotas', 'plan', 'pago'] });
+        alert('¡Cuota pagada exitosamente!');
+      }
+    } catch (err) {
+      console.error('Error verificando estado de la cuota', err);
+    }
+  }, 5000); // Verificar cada 5 segundos
 };
 
 const pagarCuotaEfectivo = async (idCuota) => {
@@ -121,7 +143,12 @@ const pagarCuotaEfectivo = async (idCuota) => {
 const cerrarModal = () => {
   qrData.value = null;
   cuotaSeleccionada.value = null;
+  if (pollingInterval) clearInterval(pollingInterval);
 };
+
+onUnmounted(() => {
+  if (pollingInterval) clearInterval(pollingInterval);
+});
 
 const formatearFecha = (fecha) => {
   if (!fecha) return '';

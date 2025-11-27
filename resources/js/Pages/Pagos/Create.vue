@@ -125,7 +125,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue';
+import { ref, reactive, onUnmounted, watch } from 'vue';
 import { router, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import axios from 'axios';
@@ -152,6 +152,7 @@ const loading = ref(false);
 const error = ref(null);
 const estadoPago = ref(props.pagoExistente ? props.pagoExistente.estado_pago : 'PENDIENTE');
 const pagoCreado = ref(!!props.pagoExistente);
+let pollingInterval = null;
 
 const calcularMontoCuota = (numeroCuotas) => {
   return (props.monto / numeroCuotas).toFixed(2);
@@ -208,6 +209,8 @@ const generarQR = async () => {
     
     if (response.data.success) {
       qrData.value = response.data.qr;
+      // Iniciar polling si se generó el QR correctamente
+      iniciarPolling(response.data.pago.id_pago);
     } else {
       error.value = response.data.message || 'Error al generar el código QR';
     }
@@ -217,6 +220,30 @@ const generarQR = async () => {
     loading.value = false;
   }
 };
+
+const iniciarPolling = (idPago) => {
+  if (pollingInterval) clearInterval(pollingInterval);
+  
+  pollingInterval = setInterval(async () => {
+    try {
+      const response = await axios.get(`${page.props.appUrl}/api/pagos/${idPago}/estado`);
+      if (response.data.success && response.data.pago.estado_pago === 'PAGADO') {
+        clearInterval(pollingInterval);
+        estadoPago.value = 'PAGADO';
+        qrData.value = null; // Ocultar QR
+        // Recargar página para mostrar estado actualizado
+        router.reload(); 
+        alert('¡Pago confirmado exitosamente!');
+      }
+    } catch (err) {
+      console.error('Error verificando estado del pago', err);
+    }
+  }, 5000); // Verificar cada 5 segundos
+};
+
+onUnmounted(() => {
+  if (pollingInterval) clearInterval(pollingInterval);
+});
 
 const formatearFecha = (fecha) => {
   if (!fecha) return '';
