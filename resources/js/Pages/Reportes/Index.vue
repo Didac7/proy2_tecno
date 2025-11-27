@@ -2,42 +2,42 @@
   <AppLayout>
     <div class="page-header">
       <h1>📊 Reportes y Estadísticas</h1>
-      <a href="/reportes/pdf" class="btn-primary" target="_blank">
+      <a :href="`${$page.props.appUrl}/reportes/pdf`" class="btn-primary" target="_blank">
         📥 Descargar PDF
       </a>
     </div>
 
     <div class="reports-nav">
       <Link 
-        href="/reportes" 
+        :href="`${$page.props.appUrl}/reportes`" 
         class="nav-item" 
         :class="{ active: !activeTab }"
       >
         Resumen
       </Link>
       <Link 
-        href="/reportes/diario" 
+        :href="`${$page.props.appUrl}/reportes/diario`" 
         class="nav-item" 
         :class="{ active: activeTab === 'diario' }"
       >
         📅 Diario
       </Link>
       <Link 
-        href="/reportes/clientes" 
+        :href="`${$page.props.appUrl}/reportes/clientes`" 
         class="nav-item" 
         :class="{ active: activeTab === 'clientes' }"
       >
         👥 Clientes
       </Link>
       <Link 
-        href="/reportes/vehiculos" 
+        :href="`${$page.props.appUrl}/reportes/vehiculos`" 
         class="nav-item" 
         :class="{ active: activeTab === 'vehiculos' }"
       >
         🚗 Vehículos
       </Link>
       <Link 
-        href="/reportes/rutas" 
+        :href="`${$page.props.appUrl}/reportes/rutas`" 
         class="nav-item" 
         :class="{ active: activeTab === 'rutas' }"
       >

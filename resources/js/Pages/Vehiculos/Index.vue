@@ -2,7 +2,7 @@
   <AppLayout>
     <div class="page-header">
       <h1>🚗 {{ isChofer ? 'Mi Vehículo' : 'Gestión de Vehículos' }}</h1>
-      <Link v-if="!isChofer" href="/vehiculos/create" class="btn-primary">
+      <Link v-if="!isChofer" :href="`${$page.props.appUrl}/vehiculos/create`" class="btn-primary">
         ➕ Nuevo Vehículo
       </Link>
     </div>
@@ -59,10 +59,10 @@
         </div>
 
         <div class="vehicle-footer">
-          <Link :href="`/vehiculos/${vehiculo.id_vehiculo}`" class="btn-small">
+          <Link :href="`${$page.props.appUrl}/vehiculos/${vehiculo.id_vehiculo}`" class="btn-small">
             Ver
           </Link>
-          <Link v-if="!isChofer" :href="`/vehiculos/${vehiculo.id_vehiculo}/edit`" class="btn-small">
+          <Link v-if="!isChofer" :href="`${$page.props.appUrl}/vehiculos/${vehiculo.id_vehiculo}/edit`" class="btn-small">
             Editar
           </Link>
         </div>

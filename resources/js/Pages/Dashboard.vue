@@ -155,7 +155,7 @@
                 </td>
                 <td>{{ formatDate(paquete.fecha_registro) }}</td>
                 <td v-if="!es_chofer">
-                  <Link :href="`/paquetes/${paquete.id_paquete}`" class="btn-small">
+                  <Link :href="`${$page.props.appUrl}/paquetes/${paquete.id_paquete}`" class="btn-small">
                     Ver
                   </Link>
                 </td>

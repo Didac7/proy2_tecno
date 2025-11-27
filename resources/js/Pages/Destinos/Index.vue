@@ -2,7 +2,7 @@
   <AppLayout>
     <div class="page-header">
       <h1>📍 Gestión de Destinos</h1>
-      <Link href="/destinos/create" class="btn-primary">
+      <Link :href="`${$page.props.appUrl}/destinos/create`" class="btn-primary">
         ➕ Nuevo Destino
       </Link>
     </div>
@@ -39,7 +39,7 @@
               <span v-else class="text-muted">No registradas</span>
             </td>
             <td class="actions">
-              <Link :href="`/destinos/${destino.id_destino}/edit`" class="btn-icon" title="Editar">
+              <Link :href="`${$page.props.appUrl}/destinos/${destino.id_destino}/edit`" class="btn-icon" title="Editar">
                 Editar
               </Link>
               <button 

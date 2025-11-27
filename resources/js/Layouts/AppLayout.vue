@@ -8,7 +8,7 @@
         <h1>🚚 Trans Velasco</h1>
         <div class="user-controls">
           <span>Bienvenido, {{ $page.props.auth.user.nombre }}</span>
-          <Link href="/logout" method="post" as="button" class="btn-logout">Salir</Link>
+          <Link :href="`${$page.props.appUrl}/logout`" method="post" as="button" class="btn-logout">Salir</Link>
         </div>
       </div>
     </header>

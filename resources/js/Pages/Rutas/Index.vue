@@ -2,7 +2,7 @@
   <AppLayout>
     <div class="page-header">
       <h1>🛣️ Gestión de Rutas</h1>
-      <Link href="/rutas/create" class="btn-primary">
+      <Link :href="`${$page.props.appUrl}/rutas/create`" class="btn-primary">
         ➕ Nueva Ruta
       </Link>
     </div>
@@ -36,7 +36,7 @@
             <td>{{ ruta.distancia_km }} km</td>
             <td>{{ ruta.tiempo_estimado }}</td>
             <td class="actions">
-              <Link :href="`/rutas/${ruta.id_ruta}/edit`" class="btn-icon" title="Editar">
+              <Link :href="`${$page.props.appUrl}/rutas/${ruta.id_ruta}/edit`" class="btn-icon" title="Editar">
                 Editar
               </Link>
               <button 
@@ -71,7 +71,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Link, router } from '@inertiajs/vue3';
+import { Link, router, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -80,6 +80,7 @@ const props = defineProps({
 });
 
 const search = ref(props.filters.search || '');
+const page = usePage();
 
 // Función debounce personalizada
 const debounce = (fn, delay) => {
@@ -91,7 +92,7 @@ const debounce = (fn, delay) => {
 };
 
 const handleSearch = debounce(() => {
-  router.get('/rutas', { 
+  router.get(`${page.props.appUrl}/rutas`, { 
     search: search.value 
   }, { 
     preserveState: true, 
@@ -101,7 +102,7 @@ const handleSearch = debounce(() => {
 
 const deleteRuta = (ruta) => {
   if (confirm(`¿Estás seguro de eliminar la ruta ${ruta.origen?.ciudad} - ${ruta.destino?.ciudad}?`)) {
-    router.delete(`/rutas/${ruta.id_ruta}`);
+    router.delete(`${page.props.appUrl}/rutas/${ruta.id_ruta}`);
   }
 };
 </script>

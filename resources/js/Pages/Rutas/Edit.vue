@@ -2,7 +2,7 @@
   <AppLayout>
     <div class="page-header">
       <h1>✏️ Editar Ruta</h1>
-      <Link href="/rutas" class="btn-secondary">
+      <Link :href="`${$page.props.appUrl}/rutas`" class="btn-secondary">
         ← Volver
       </Link>
     </div>
@@ -70,7 +70,7 @@
           <button type="submit" class="btn-primary" :disabled="form.processing">
             {{ form.processing ? 'Guardando...' : '💾 Actualizar Ruta' }}
           </button>
-          <Link href="/rutas" class="btn-cancel">
+          <Link :href="`${$page.props.appUrl}/rutas`" class="btn-cancel">
             Cancelar
           </Link>
         </div>
@@ -80,7 +80,7 @@
 </template>
 
 <script setup>
-import { useForm, Link } from '@inertiajs/vue3';
+import { useForm, Link, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -95,8 +95,10 @@ const form = useForm({
   tiempo_estimado: props.ruta.tiempo_estimado
 });
 
+const page = usePage();
+
 const submit = () => {
-  form.put(`/rutas/${props.ruta.id_ruta}`);
+  form.put(`${page.props.appUrl}/rutas/${props.ruta.id_ruta}`);
 };
 </script>
 

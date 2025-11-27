@@ -2,7 +2,7 @@
   <AppLayout>
     <div class="page-header">
       <h1>➕ Nuevo Paquete</h1>
-      <Link href="/paquetes" class="btn-secondary">
+      <Link :href="`${$page.props.appUrl}/paquetes`" class="btn-secondary">
         ← Volver
       </Link>
     </div>
@@ -175,7 +175,7 @@
           <button type="submit" class="btn-primary" :disabled="form.processing">
             {{ form.processing ? 'Guardando...' : '💾 Guardar Paquete' }}
           </button>
-          <Link href="/paquetes" class="btn-cancel">
+          <Link :href="`${$page.props.appUrl}/paquetes`" class="btn-cancel">
             Cancelar
           </Link>
         </div>

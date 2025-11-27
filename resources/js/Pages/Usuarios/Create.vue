@@ -2,7 +2,7 @@
   <AppLayout>
     <div class="page-header">
       <h1>➕ Nuevo Usuario</h1>
-      <Link href="/usuarios" class="btn-secondary">
+      <Link :href="`${$page.props.appUrl}/usuarios`" class="btn-secondary">
         ← Volver
       </Link>
     </div>
@@ -132,7 +132,7 @@
           <button type="submit" class="btn-primary" :disabled="form.processing">
             {{ form.processing ? 'Guardando...' : '💾 Guardar Usuario' }}
           </button>
-          <Link href="/usuarios" class="btn-cancel">
+          <Link :href="`${$page.props.appUrl}/usuarios`" class="btn-cancel">
             Cancelar
           </Link>
         </div>

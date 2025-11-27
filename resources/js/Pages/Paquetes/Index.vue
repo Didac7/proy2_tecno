@@ -2,7 +2,7 @@
   <AppLayout>
     <div class="page-header">
       <h1>📦 {{ getTitulo }}</h1>
-      <Link v-if="canCreate" href="/paquetes/create" class="btn-primary">
+      <Link v-if="canCreate" :href="`${$page.props.appUrl}/paquetes/create`" class="btn-primary">
         ➕ Nuevo Paquete
       </Link>
     </div>
@@ -81,12 +81,12 @@
               <td v-if="!isChofer">{{ formatDate(paquete.fecha_registro) }}</td>
               <td v-if="!isCliente">
                 <div class="action-buttons">
-                  <Link :href="`/paquetes/${paquete.id_paquete}`" class="btn-icon" title="Ver">
+                  <Link :href="`${$page.props.appUrl}/paquetes/${paquete.id_paquete}`" class="btn-icon" title="Ver">
                     Ver
                   </Link>
                   <Link 
                     v-if="canEdit" 
-                    :href="`/paquetes/${paquete.id_paquete}/edit`" 
+                    :href="`${$page.props.appUrl}/paquetes/${paquete.id_paquete}/edit`" 
                     class="btn-icon" 
                     title="Editar"
                   >
@@ -94,7 +94,7 @@
                   </Link>
                   <Link 
                     v-if="!paquete.pago || paquete.pago.estado_pago !== 'PAGADO'" 
-                    :href="`/paquetes/${paquete.id_paquete}/pagar`" 
+                    :href="`${$page.props.appUrl}/paquetes/${paquete.id_paquete}/pagar`" 
                     class="btn-icon btn-pagar" 
                     title="Pagar"
                   >

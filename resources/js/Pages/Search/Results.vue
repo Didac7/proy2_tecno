@@ -12,7 +12,7 @@
         <Link
           v-for="paquete in resultados.paquetes"
           :key="paquete.id_paquete"
-          :href="`/paquetes/${paquete.id_paquete}`"
+          :href="`${$page.props.appUrl}/paquetes/${paquete.id_paquete}`"
           class="result-card"
         >
           <div class="result-icon">📦</div>
@@ -34,7 +34,7 @@
         <Link
           v-for="usuario in resultados.usuarios"
           :key="usuario.id_usuario"
-          :href="`/usuarios/${usuario.id_usuario}`"
+          :href="`${$page.props.appUrl}/usuarios/${usuario.id_usuario}`"
           class="result-card"
         >
           <div class="result-icon">👤</div>
@@ -56,7 +56,7 @@
         <Link
           v-for="vehiculo in resultados.vehiculos"
           :key="vehiculo.id_vehiculo"
-          :href="`/vehiculos/${vehiculo.id_vehiculo}`"
+          :href="`${$page.props.appUrl}/vehiculos/${vehiculo.id_vehiculo}`"
           class="result-card"
         >
           <div class="result-icon">🚗</div>

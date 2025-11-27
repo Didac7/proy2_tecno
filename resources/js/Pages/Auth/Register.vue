@@ -120,7 +120,7 @@
       </form>
 
       <div class="login-link">
-        <p>¿Ya tienes una cuenta? <Link href="/login" class="link-login">Iniciar sesión</Link></p>
+        <p>¿Ya tienes una cuenta? <Link :href="`${$page.props.appUrl}/login`" class="link-login">Iniciar sesión</Link></p>
       </div>
 
       <div class="register-footer">

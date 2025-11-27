@@ -53,12 +53,18 @@ class HandleInertiaRequests extends Middleware
                     return in_array($user->tipo_usuario, $roles);
                 })
                 ->map(function ($menu) use ($user) {
-                    // Filtrar hijos también por rol
+                    // Asegurar que la URL incluya el subdirectorio
+                    $menu->url = url($menu->url);
+
+                    // Filtrar hijos también por rol y ajustar URL
                     if ($menu->hijos) {
                         $menu->setRelation('hijos', $menu->hijos->filter(function ($hijo) use ($user) {
                             if (!$hijo->roles) return true;
                             $roles = is_array($hijo->roles) ? $hijo->roles : json_decode($hijo->roles, true);
                             return in_array($user->tipo_usuario, $roles);
+                        })->map(function ($hijo) {
+                            $hijo->url = url($hijo->url);
+                            return $hijo;
                         })->values());
                     }
                     return $menu;
@@ -90,6 +96,7 @@ class HandleInertiaRequests extends Middleware
                 'success' => $request->session()->get('success'),
                 'error' => $request->session()->get('error'),
             ],
+            'appUrl' => config('app.url'),
         ]);
     }
 }

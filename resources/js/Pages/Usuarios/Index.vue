@@ -2,7 +2,7 @@
   <AppLayout>
     <div class="page-header">
       <h1>👥 Gestión de Usuarios</h1>
-      <Link href="/usuarios/create" class="btn-primary">
+      <Link :href="`${$page.props.appUrl}/usuarios/create`" class="btn-primary">
         ➕ Nuevo Usuario
       </Link>
     </div>
@@ -51,7 +51,7 @@
               </span>
             </td>
             <td class="actions">
-              <Link :href="`/usuarios/${usuario.id_usuario}/edit`" class="btn-icon" title="Editar">
+              <Link :href="`${$page.props.appUrl}/usuarios/${usuario.id_usuario}/edit`" class="btn-icon" title="Editar">
                 Editar
               </Link>
               <button 

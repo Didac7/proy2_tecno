@@ -2,7 +2,7 @@
   <AppLayout>
     <div class="page-header">
       <h1>✏️ Editar Vehículo</h1>
-      <Link href="/vehiculos" class="btn-secondary">
+      <Link :href="`${$page.props.appUrl}/vehiculos`" class="btn-secondary">
         ← Volver
       </Link>
     </div>
@@ -89,7 +89,7 @@
           <button type="submit" class="btn-primary" :disabled="form.processing">
             {{ form.processing ? 'Guardando...' : '💾 Actualizar Vehículo' }}
           </button>
-          <Link href="/vehiculos" class="btn-cancel">
+          <Link :href="`${$page.props.appUrl}/vehiculos`" class="btn-cancel">
             Cancelar
           </Link>
         </div>

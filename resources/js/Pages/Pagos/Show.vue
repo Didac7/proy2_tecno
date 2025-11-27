@@ -2,7 +2,7 @@
   <AppLayout>
     <div class="page-header">
       <h1>🧾 Detalle de Pago</h1>
-      <Link href="/pagos" class="btn-secondary">
+      <Link :href="`${$page.props.appUrl}/pagos`" class="btn-secondary">
         ← Volver
       </Link>
     </div>

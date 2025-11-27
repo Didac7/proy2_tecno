@@ -53,7 +53,7 @@
           <tr v-for="pago in pagos.data" :key="pago.id_pago">
             <td>#{{ pago.id_pago }}</td>
             <td>
-              <Link :href="`/paquetes/${pago.id_paquete}`" class="link-paquete">
+              <Link :href="`${$page.props.appUrl}/paquetes/${pago.id_paquete}`" class="link-paquete">
                 {{ pago.paquete?.codigo_seguimiento }}
               </Link>
             </td>
@@ -85,7 +85,7 @@
             <td>
               <Link 
                 v-if="pago.estado_pago === 'PENDIENTE'"
-                :href="`/paquetes/${pago.id_paquete}/pagar`" 
+                :href="`${$page.props.appUrl}/paquetes/${pago.id_paquete}/pagar`" 
                 class="btn-action btn-pay"
                 title="Pagar ahora"
               >

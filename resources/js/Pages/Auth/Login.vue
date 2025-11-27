@@ -55,7 +55,7 @@
       </form>
 
       <div class="register-link">
-        <p>¿No tienes una cuenta? <Link href="/register" class="link-register">Crear cuenta</Link></p>
+        <p>¿No tienes una cuenta? <Link :href="`${$page.props.appUrl}/register`" class="link-register">Crear cuenta</Link></p>
       </div>
 
       <div class="login-footer">

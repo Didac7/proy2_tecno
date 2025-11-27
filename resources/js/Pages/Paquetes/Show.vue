@@ -2,7 +2,7 @@
   <AppLayout>
     <div class="page-header">
       <h1>📦 Detalle del Paquete</h1>
-      <Link href="/paquetes" class="btn-secondary">
+      <Link :href="`${$page.props.appUrl}/paquetes`" class="btn-secondary">
         ← Volver
       </Link>
     </div>
@@ -117,14 +117,14 @@
             <span class="value">{{ formatDateTime(paquete.pago.fecha_pago) }}</span>
           </div>
           <div v-if="paquete.pago.tipo_pago === 'CREDITO'" class="cuotas-link">
-            <Link :href="`/pagos/${paquete.pago.id_pago}/cuotas`" class="btn-ver-cuotas">
+            <Link :href="`${$page.props.appUrl}/pagos/${paquete.pago.id_pago}/cuotas`" class="btn-ver-cuotas">
               📅 Ver Plan de Cuotas
             </Link>
           </div>
         </div>
         <div v-else class="no-payment">
           <p>⚠️ Este paquete aún no tiene un pago registrado</p>
-          <Link :href="`/paquetes/${paquete.id_paquete}/pagar`" class="btn-crear-pago">
+          <Link :href="`${$page.props.appUrl}/paquetes/${paquete.id_paquete}/pagar`" class="btn-crear-pago">
             💳 Crear Pago
           </Link>
         </div>
@@ -173,14 +173,14 @@
     <!-- Acciones -->
     <div class="actions-bar">
       <Link 
-        :href="`/paquetes/${paquete.id_paquete}/pagar`" 
+        :href="`${$page.props.appUrl}/paquetes/${paquete.id_paquete}/pagar`" 
         class="btn-payment"
       >
         💳 Pagar Envío
       </Link>
       <Link 
         v-if="canEdit" 
-        :href="`/paquetes/${paquete.id_paquete}/edit`" 
+        :href="`${$page.props.appUrl}/paquetes/${paquete.id_paquete}/edit`" 
         class="btn-primary"
       >
         ✏️ Editar
