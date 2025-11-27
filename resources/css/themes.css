@@ -1,0 +1,247 @@
+/* ========================================
+   VARIABLES GLOBALES Y TEMAS
+   ======================================== */
+
+/* TEMA BASE - JÓVENES (Por defecto) */
+:root,
+[data-theme="jovenes"] {
+  /* Colores principales */
+  --primary: #6c63ff;
+  --secondary: #3498db;
+  --success: #2ecc71;
+  --danger: #e74c3c;
+  --warning: #f39c12;
+  --info: #3498db;
+
+  /* Fondos */
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --card-bg: #0f3460;
+  
+  /* Textos */
+  --text-color: #e8e8e8;
+  --text-secondary: #a0a0a0;
+  
+  /* Bordes */
+  --border-color: #2d3748;
+  --border-radius: 8px;
+  
+  /* Fuente */
+  --font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* TEMA NIÑOS - Colores vibrantes y alegres */
+[data-theme="ninos"] {
+  --primary: #ff6b9d;
+  --secondary: #ffa500;
+  --success: #4caf50;
+  --danger: #f44336;
+  --warning: #ffeb3b;
+  --info: #00bcd4;
+
+  --bg-primary: #fff5f7;
+  --bg-secondary: #ffe4e9;
+  --card-bg: #ffffff;
+  
+  --text-color: #2c3e50;
+  --text-secondary: #7f8c8d;
+  
+  --border-color: #ffc0cb;
+  --border-radius: 16px;
+  
+  --font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+}
+
+/* TEMA ADULTOS - Profesional y sobrio */
+[data-theme="adultos"] {
+  --primary: #2c3e50;
+  --secondary: #34495e;
+  --success: #27ae60;
+  --danger: #c0392b;
+  --warning: #d68910;
+  --info: #2980b9;
+
+  --bg-primary: #ecf0f1;
+  --bg-secondary: #bdc3c7;
+  --card-bg: #ffffff;
+  
+  --text-color: #2c3e50;
+  --text-secondary: #7f8c8d;
+  
+  --border-color: #95a5a6;
+  --border-radius: 4px;
+  
+  --font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+/* ========================================
+   MODO OSCURO
+   ======================================== */
+
+[data-dark-mode="true"] {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1a1a;
+  --card-bg: #2a2a2a;
+  
+  --text-color: #e8e8e8;
+  --text-secondary: #a0a0a0;
+  
+  --border-color: #3a3a3a;
+}
+
+[data-dark-mode="true"][data-theme="ninos"] {
+  --bg-primary: #2d1b2e;
+  --bg-secondary: #3d2b3e;
+  --card-bg: #4d3b4e;
+  
+  --text-color: #ffd1dc;
+  --text-secondary: #ffb3c1;
+}
+
+[data-dark-mode="true"][data-theme="adultos"] {
+  --bg-primary: #1c1c1c;
+  --bg-secondary: #2c2c2c;
+  --card-bg: #3c3c3c;
+  
+  --text-color: #d0d0d0;
+  --text-secondary: #909090;
+}
+
+/* ========================================
+   TAMAÑOS DE FUENTE
+   ======================================== */
+
+/* Tamaño pequeño */
+[data-font-size="small"] {
+  font-size: 14px;
+}
+
+[data-font-size="small"] h1 { font-size: 1.8rem; }
+[data-font-size="small"] h2 { font-size: 1.5rem; }
+[data-font-size="small"] h3 { font-size: 1.2rem; }
+[data-font-size="small"] p, [data-font-size="small"] span { font-size: 0.9rem; }
+[data-font-size="small"] button, [data-font-size="small"] input, [data-font-size="small"] select { font-size: 0.85rem; }
+
+/* Tamaño normal (por defecto) */
+[data-font-size="normal"], :root {
+  font-size: 16px;
+}
+
+[data-font-size="normal"] h1 { font-size: 2rem; }
+[data-font-size="normal"] h2 { font-size: 1.75rem; }
+[data-font-size="normal"] h3 { font-size: 1.5rem; }
+
+/* Tamaño grande */
+[data-font-size="large"] {
+  font-size: 18px;
+}
+
+[data-font-size="large"] h1 { font-size: 2.5rem; }
+[data-font-size="large"] h2 { font-size: 2.2rem; }
+[data-font-size="large"] h3 { font-size: 1.8rem; }
+[data-font-size="large"] p, [data-font-size="large"] span { font-size: 1.1rem; }
+[data-font-size="large"] button, [data-font-size="large"] input, [data-font-size="large"] select { font-size: 1.05rem; }
+
+/* ========================================
+   ALTO CONTRASTE
+   ======================================== */
+
+[data-high-contrast="true"] {
+  --primary: #0000ff;
+  --secondary: #00ff00;
+  --success: #00ff00;
+  --danger: #ff0000;
+  --warning: #ffff00;
+  --info: #00ffff;
+
+  --bg-primary: #000000;
+  --bg-secondary: #000000;
+  --card-bg: #000000;
+  
+  --text-color: #ffffff;
+  --text-secondary: #ffff00;
+  
+  --border-color: #ffffff;
+}
+
+[data-high-contrast="true"] a,
+[data-high-contrast="true"] button {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+[data-high-contrast="true"] input,
+[data-high-contrast="true"] select,
+[data-high-contrast="true"] textarea {
+  border: 3px solid #ffffff !important;
+}
+
+/* ========================================
+   ESTILOS BASE
+   ======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-primary);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  line-height: 1.6;
+}
+
+/* Mejorar legibilidad */
+p {
+  margin-bottom: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+/* Accesibilidad para enlaces */
+a {
+  color: var(--primary);
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--secondary);
+}
+
+a:focus {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Accesibilidad para botones */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Animaciones suaves */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Asegurar que las imágenes sean responsivas */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mejorar contraste de selección de texto */
+::selection {
+  background: var(--primary);
+  color: white;
+}

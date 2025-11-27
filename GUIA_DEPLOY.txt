@@ -1,0 +1,96 @@
+# 🚀 Guía de Despliegue con Git y SSH - Trans Velasco
+
+Esta guía te explica paso a paso cómo subir tu proyecto a GitHub y desplegarlo en tu servidor de producción.
+
+## 1. Preparar el repositorio local (Tu computadora)
+
+Abre la terminal en la carpeta de tu proyecto (`transvelasco-web`) y ejecuta:
+
+```bash
+# 1. Inicializar git (si no lo has hecho)
+git init
+
+# 2. Agregar todos los archivos
+git add .
+
+# 3. Guardar los cambios
+git commit -m "Versión lista para producción"
+
+# 4. Crear la rama principal
+git branch -M main
+
+# 5. Conectar con GitHub (REEMPLAZA LA URL CON LA DE TU REPOSITORIO)
+# Crea un repositorio vacío en GitHub primero
+git remote add origin https://github.com/TU_USUARIO/transvelasco-web.git
+
+# 6. Subir el código
+git push -u origin main
+```
+
+## 2. Desplegar en el Servidor (SSH)
+
+Conéctate a tu servidor vía SSH y sigue estos pasos:
+
+### A. Clonar el repositorio (Primera vez)
+
+Si ya tienes una carpeta `proyecto2`, haz una copia de seguridad y elimínala, o clona en una nueva.
+
+```bash
+cd /home/grupo09sc/
+
+# Clonar el repositorio
+git clone https://github.com/TU_USUARIO/transvelasco-web.git proyecto2
+
+# Entrar a la carpeta
+cd proyecto2
+```
+
+### B. Configurar el entorno
+
+Necesitas crear el archivo `.env` con tus credenciales de producción.
+
+```bash
+# Copiar el ejemplo
+cp .env.example .env
+
+# Editar el archivo
+nano .env
+```
+
+**Asegúrate de configurar:**
+- `APP_URL=https://mail.tecnoweb.org.bo/inf513/grupo09sc/proyecto2`
+- `DB_DATABASE=db_grupo09sc`
+- `DB_USERNAME=grupo09sc`
+- `DB_PASSWORD=TU_CONTRASEÑA`
+- `PAGOFACIL_CALLBACK_URL=https://mail.tecnoweb.org.bo/inf513/grupo09sc/proyecto2/api/pagofacil/callback`
+
+### C. Ejecutar el script de despliegue
+
+He creado un script `deploy.sh` que hace todo el trabajo difícil por ti (instalar dependencias, compilar, migrar, limpiar caché).
+
+```bash
+# Dar permisos de ejecución al script
+chmod +x deploy.sh
+
+# Ejecutar el despliegue
+./deploy.sh
+```
+
+## 3. Actualizaciones Futuras
+
+Cuando hagas cambios en tu computadora:
+
+1. **En tu PC:**
+   ```bash
+   git add .
+   git commit -m "Descripción de los cambios"
+   git push origin main
+   ```
+
+2. **En el Servidor:**
+   ```bash
+   cd /home/grupo09sc/proyecto2
+   ./deploy.sh
+   ```
+
+¡Listo! El script se encargará de bajar los cambios y actualizar todo automáticamente.
