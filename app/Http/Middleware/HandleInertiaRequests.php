@@ -96,7 +96,7 @@ class HandleInertiaRequests extends Middleware
                 'success' => $request->session()->get('success'),
                 'error' => $request->session()->get('error'),
             ],
-            'appUrl' => config('app.url'),
+            'appUrl' => 'https://mail.tecnoweb.org.bo/inf513/grupo09sc/proyecto2/proy2_tecno/public',
         ]);
     }
 }
