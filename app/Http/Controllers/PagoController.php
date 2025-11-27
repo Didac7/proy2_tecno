@@ -279,13 +279,13 @@ class PagoController extends Controller
                     'monto_total' => $monto,
                     'metodo_pago' => 'QR',
                     'estado_pago' => 'PENDIENTE',
-                    'numero_transaccion' => 'PAY-' . $id_paquete . '-' . time(),
+                    'numero_transaccion' => 'PAY-' . $id_paquete . '-' . uniqid(),
                 ]);
             } else {
                 // Si ya existe, actualizar el número de transacción para evitar duplicados en PagoFácil
                 // y asegurar que el método de pago sea QR
                 $pago->update([
-                    'numero_transaccion' => 'PAY-' . $id_paquete . '-' . time(),
+                    'numero_transaccion' => 'PAY-' . $id_paquete . '-' . uniqid(),
                     'metodo_pago' => 'QR'
                 ]);
             }
@@ -515,7 +515,7 @@ class PagoController extends Controller
                 'document_id' => $cliente->ci ?? '0000000',
                 'phone_number' => $cliente->telefono ?? '72971922',
                 'email' => $cliente->email ?? 'cliente@transvelasco.com',
-                'payment_number' => 'CUOTA-' . $id_cuota . '-' . time(),
+                'payment_number' => 'CUOTA-' . $id_cuota . '-' . uniqid(),
                 'amount' => $montoParaQR,
                 'client_code' => strval($cliente->id_usuario),
                 'order_detail' => [
