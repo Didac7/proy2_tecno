@@ -69,7 +69,7 @@
 </template>
 
 <script setup>
-import { useForm, Link } from '@inertiajs/vue3';
+import { useForm, Link, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -83,8 +83,10 @@ const form = useForm({
   longitud: props.destino.longitud
 });
 
+const page = usePage();
+
 const submit = () => {
-  form.put(`/destinos/${props.destino.id_destino}`);
+  form.put(`${page.props.appUrl}/destinos/${props.destino.id_destino}`);
 };
 </script>
 

@@ -185,7 +185,7 @@
 </template>
 
 <script setup>
-import { useForm, Link } from '@inertiajs/vue3';
+import { useForm, Link, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const props = defineProps({
@@ -193,6 +193,8 @@ const props = defineProps({
   vehiculos: Array,
   clientes: Array,
 });
+
+const page = usePage();
 
 const form = useForm({
   id_remitente: '',
@@ -209,7 +211,7 @@ const form = useForm({
 });
 
 const submit = () => {
-  form.post('/paquetes');
+  form.post(`${page.props.appUrl}/paquetes`);
 };
 </script>
 
