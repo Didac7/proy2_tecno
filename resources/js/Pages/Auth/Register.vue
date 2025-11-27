@@ -148,7 +148,7 @@ const form = useForm({
 const showPassword = ref(false);
 
 const submit = () => {
-  form.post('/register', {
+  form.post('register', {
     onFinish: () => form.reset('password', 'password_confirmation'),
   });
 };
