@@ -34,14 +34,15 @@
 
 <script setup>
 import { ref } from 'vue';
-import { router } from '@inertiajs/vue3';
+import { router, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 
 const codigo = ref('');
+const page = usePage();
 
 const rastrear = () => {
   if (codigo.value.trim()) {
-    router.visit(`/rastreo/${codigo.value.trim()}`);
+    router.visit(`${page.props.appUrl}/rastreo/${codigo.value.trim()}`);
   }
 };
 </script>
